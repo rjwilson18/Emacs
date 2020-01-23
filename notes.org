@@ -1,0 +1,6 @@
+if package not found try:
+#+begin_src lisp
+(package-refresh-contents)
+#+end_src
+
+this will download new package lists from all added repos
