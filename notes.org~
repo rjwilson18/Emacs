@@ -1,0 +1,4 @@
+if package not found try:
+#+begin_src lisp
+(package-refresh-contents)
+#+end_src
