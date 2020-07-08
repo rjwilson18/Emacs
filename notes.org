@@ -29,3 +29,36 @@ If the package you are trying to install is not found, try:
 #+end_src
 
 This will download updated package lists from all of your added repos.
+
+* Magit Notes
+** Create Repository
+#+begin_src lisp
+ (magit-init)
+#+end_src
+
+** Open Magit Repo
+1. go to directory using C-x f
+2. Open magit status
+ a. Set to C-x g
+#+begin_src lisp
+ (magit-status)
+#+end_src
+
+** Once in Repo
+s to stage
+u to unstage
+tab to expand/collapse
+
+** Commit
+1. c will commit staged files
+2. 2 buffers pop up.
+ 1. shows changes being committed
+ 2. allows you to enter commit message
+3. C-c C-c performs commit
+
+** Push
+#+begin_src lisp
+ (magit-push)
+#+end_src
+
+p to push to remote
