@@ -1,6 +1,31 @@
-if package not found try:
+* Initial Setup
+Install Emacs from Emacs GNU website.
+
+When run the first time it will create the .emacs.d directory in 
+C:\Users\USERID\AppData\Roaming.
+
+It will not create the .emacs file that is supposed to be in the same directory. 
+To create a .emacs file either change a setting or download a package. 
+Either of these actions will generate a .emacs file. 
+Personally, I like changing to a dark-mode theme so I can cool like all the other programmers.
+
+To do this go to  Options > Customize Emacs > Custome Themes.
+Then click a theme. I've been using 'Wheatgrass' lately.
+Then click 'Save Theme Settings' and presto, a .emacs file is created.
+
+Now, configure the .emacs file to point towards a .el file where all user changes will be made. 
+At the top of your .emacs place the following code:
+#+begin_src lisp
+(package-initialize)
+(load-file "c:/path_to_emacs_dir/your_file_name.el")
+#+end_src
+
+Ideally, the next step would be to download the custom .el from github and place it in the location specified above.
+
+* Installing Packages 
+If the package you are trying to install is not found, try:
 #+begin_src lisp
 (package-refresh-contents)
 #+end_src
 
-this will download new package lists from all added repos
+This will download updated package lists from all of your added repos.
