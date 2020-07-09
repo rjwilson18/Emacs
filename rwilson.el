@@ -39,16 +39,13 @@ Return a list of installed packages or nil for every skipped package."
 ;; Pacakges to ensure are installed
 (ensure-package-installed
  'rainbow-delimiters
- 'undo-tree
- 'ace-jump-mode
  'ess
  'ess-R-data-view
- 'helm
  'xkcd
  'magit
  'powershell
  'htmlize
- 'iedit
+ 'yasnippet
  )
 
 
@@ -88,19 +85,37 @@ Return a list of installed packages or nil for every skipped package."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;               Abbreviations Handler                ;;
+;;               Abbreviations Yas Handler            ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; set global abbrev mode and file location
 (setq-default abbrev-mode t) ;;gloablly set abbreviation mode on
 (setq abbrev-file-name "c:/users/dickw/documents/emacs/abbreviations") ;;store abbreviations here
+
+;;set yas directory and turn snippets on
+(yas-global-mode 1) ;;Globally turn yas mode on
+(yas-load-directory "c:/users/dickw/documents/emacs/mysnippets")
+(setq yas-snippet-dirs '("c:/users/dickw/documents/emacs/mysnippets"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                      Org Mode                      ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (org-babel-do-load-languages
- 'org-bable-load-languages
- '(
-   (python . t)
-   (shell . t)
-   (sql . t)
-   )
- )
+ 'org-babel-load-languages
+   (quote
+    (
+     (sql . t)
+     (python . t)
+     (shell . t)
+     (dot . t)
+    )
+  )
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                        Misc.                       ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; alias yes/no y/n
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+

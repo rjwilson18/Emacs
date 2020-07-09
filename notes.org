@@ -14,15 +14,29 @@ Then click a theme. I've been using 'Wheatgrass' lately.
 Then click 'Save Theme Settings' and presto, a .emacs file is created.
 
 Now, configure the .emacs file to point towards a .el file where all user changes will be made. 
-At the top of your .emacs place the following code:
+At the top of your .emacs place the following code under the (package-initialize) function:
 #+begin_src lisp
-(package-initialize)
 (load-file "c:/path_to_emacs_dir/your_file_name.el")
 #+end_src
 
-Ideally, the next step would be to download the custom .el from github and place it in the location specified above.
+Also check any file paths that may need to be changed: \\
+Python Shell Interpretor
+Abbreviations
+YAS Smippets
+
+Ideally, the next step would be to download the custom .el from [[Github][Github]] and place it in the location specified above.
+
+
 
 * Installing Packages 
+
+To install a package:
+#+begin_src lisp
+package-install
+#+end_src
+
+press return, then enter package name.
+
 If the package you are trying to install is not found, try:
 #+begin_src lisp
 (package-refresh-contents)
@@ -31,6 +45,20 @@ If the package you are trying to install is not found, try:
 This will download updated package lists from all of your added repos.
 
 * Magit Notes
+** Git setup <<Github>>
+If on windows, install Git from [[gitforwindows.org]]
+I mostly use the default settings other than the default text editor I set to NP++.
+Emacs isn't an option.
+
+Open the Git command window.
+
+cd to destination of desired repo. 
+
+Pull repo with clone command:
+#+begin_src shell
+git clone https://git.com/rjwilson18/REPO_NAME.git
+#+end_src
+
 ** Create Repository
 #+begin_src lisp
  (magit-init)
