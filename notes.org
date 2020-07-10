@@ -13,6 +13,14 @@ To do this go to  Options > Customize Emacs > Custome Themes.
 Then click a theme. I've been using 'Wheatgrass' lately.
 Then click 'Save Theme Settings' and presto, a .emacs file is created.
 
+Before editing the new .emacs file run the following:
+#+begin_src lisp
+package-list-packages
+#+end_src
+
+When prompted for MELPA license application hit 'a' for always. 
+That will allow the license to apply to future sessions.
+
 Now, configure the .emacs file to point towards a .el file where all user changes will be made. 
 At the top of your .emacs place the following code under the (package-initialize) function:
 #+begin_src lisp
@@ -20,9 +28,9 @@ At the top of your .emacs place the following code under the (package-initialize
 #+end_src
 
 Also check any file paths that may need to be changed: \\
-Python Shell Interpretor
-Abbreviations
-YAS Smippets
+Python Shell Interpretor \\
+Abbreviations \\
+YAS Snippets \\
 
 Ideally, the next step would be to download the custom .el from [[Github][Github]] and place it in the location specified above.
 
