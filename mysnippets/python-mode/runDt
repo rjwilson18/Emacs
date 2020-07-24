@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: runDt
+# key: runDt
+# --
+import datetime as dt
+
+#create versioning date
+now = dt.datetime.now()
+dt_run = now.strftime("%Y%m%d")

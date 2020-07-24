@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: orgheader
+# key: orgheader
+# --
+
+#+TITLE:       
+#+AUTHOR:      Richard Wilson
+#+DATE:        
+
+#+OPTIONS: ^:{}
+#+OPTIONS: todo:nil
+  

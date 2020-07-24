@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: inputCSV
+# key: inputCSV
+# --
+
+input_fpath = $1
+$2 = pd.read_csv(input_fpath)

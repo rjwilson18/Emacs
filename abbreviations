@@ -19,7 +19,16 @@
 
 (define-abbrev-table 'global-abbrev-table
   '(
+    ("afaict" "as far as I can tell" nil 1)
+    ("btw" "by the way" nil 3)
+    ("fdrive" "\\\\WGPIF001Dept.aah.local\\Dept\\" nil 1)
+    ("hte" "the" nil 2)
+    ("kdrive" "\\\\grbaahvwpfile06.aah.local\\modelteam\\" nil 3)
+    ("mdrive" "\\\\wgpif004\\storage\\" nil 2)
+    ("pov" "point of view" nil 3)
+    ("recieve" "receive" nil 1)
     ("teh" "the" nil 1)
+    ("wether" "whether" nil 5)
    ))
 
 (define-abbrev-table 'lisp-mode-abbrev-table '())

@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: copy_file
+# key: copy_file
+# --
+
+from shutil import copyfile
+
+#Copy File from src, to dst, returns dst filepath
+dst_path = copyfile($1 , $2)
