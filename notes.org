@@ -98,3 +98,127 @@ tab to expand/collapse
 #+end_src
 
 p to push to remote
+* Grphviz Notes
+** Graphviz Setup
+Download:
+Windows: https://graphviz.org/download/
+Ubuntu: sudo apt install graphviz
+
+Make sure this block is in the .emacs
+
+#+begin_src lisp
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+   (quote
+    (
+     (dot . t)
+    )
+  )
+)
+
+#+end_src
+
+** Use Example
+#+name: daily_flow_node_table
+|*node*|*label*|*shape*|*fillcolor*|
+|------+-------+-------+-----------|
+|start| drr_sas_begin| | |
+|informatica|BDW/ODS | | |
+|clm054|drr_sas_clm054_cat_dev|| |
+|svc025|drr_sas_svc025_BI_UM_UIM|||
+|aud016|drr_sas_aud016|||
+|phs025|drr_sas_phs025_Agncy_Call_Tracker| |yelow|
+|uw308|drr_sas_uw308_NY_NJ_HI_rnwls| | | 
+|aud022|drr_sas_aud022_qa_pbi||yellow|
+|clm086|drr_sas_clm086_Open_Leader_Diaries|||
+|phs047|drr_sas_phs047_MIS_Project_email|||
+|clm087|drr_sas_clm087_Home_Clms_at_Incptn|||
+|clm092|drr_sas_clm092_Clms_CSC_1x1|||
+|uw272|drr_sas_uw272_uw_pol_review||yellow|
+|uw142|drr_sas_uw142_Umb_Binds|||
+|aud008|drr_sas_aud008_nice_from_sas||yellow|
+|admin001|drr_sas_admin001_mb_rnwl_eff_dt |||
+|uw278|drr_sas_uw278_UmbNegChange_first||yellow|
+|uw129|drr_sas_uw129_30_day_rprt_APP-PRE||yellow|
+|svc050|drr_sas_svc050_mw1_non_pay|||
+|svc050a|drr_sas_svc050_mail_addr_updt|||
+|svc050b|drr_sas_svc050_ext_covg_a_yes_reject|||
+|svc050c|drr_sas_svc050_uw_no_contact|||
+|svc050d|drr_sas_svc050_LH_Mortgage_RTM|||
+|admin018|drr_sas_admin018_asu_call_hist_codes||yellow|
+|phs112|drr_sas_phs112_sale_per_day||yellow|
+|mkt136|drr_sas_mkt136_advisor_dash_for_sales||yellow|
+|uw337|drr_sas_uw337_online_mvr_clue_rev_wrkld||yellow|
+|admin016|drr_sas_admin016_asu_ps1||yellow|
+|admin016a|drr_sas_admin016_asu_ps2||yellow|
+|admin016b|drr_sas_admin016_asu_ps2_ee||yellow|
+|admin016c|drr_sas_admin016_asu_ps3||yellow|
+|phs012|drr_sas_phs012_daily_quotes_by_rep||yellow|
+|mkt136|drr_sas_mkt136_undeliverable_quotes||yellow|
+
+#+name: daily_flow_path_table
+|from|to|label|
+|----+--+-----|
+|start|clm054|success |
+|start|svc025|success|
+|start|aud016|success|
+|aud016|aud022|done|
+|start|phs025|success|
+|start|uw308|success|
+|start|aud008||success|
+|aud022|aud009|done|
+|clm054|clm086|done|
+|phs025|phs047|done|
+|clm086|clm087|done|
+|clm087|clm092|done|
+|uw308|uw272|done|
+|uw272|uw142|done|
+|uw142|admin001|done|
+|informatica|aud008|success|
+|admin001|uw278|done|
+|uw278|uw129|done|
+|svc025|svc050|done|
+|svc050|svc050a|done|
+|svc050a|svc050b|done|
+|svc050b|svc050c|done|
+|svc050c|svc050d|done|
+|aud008|admin018|done|
+|admin018|phs112|done|
+|uw129|uw337|done|
+|phs112|admin016|done|
+|admin016|admin016a|done|
+|admin016a|admin016b|done|
+|admin016b|admin016c|done|
+|admin016c|phs012|done|
+|aud022|mkt136|done|
+
+#+name: daily_flow_graph
+#+HEADER: :var nodes=daily_flow_node_table graph=daily_flow_path_table
+#+BEGIN_SRC emacs-lisp :colnames yes
+     (concat
+          "digraph {\n"
+          "//rankdir=LR;\n" ;; remove comment characters '//' for horizontal layout; add for vertical layout
+          (mapconcat
+           (lambda (x)
+             (format "%s [label=\"%s\" shape=%s style=\"filled\" fillcolor=\"%s\"]"
+                             (car x)
+                             (nth 1 x)
+                             (if (string= "" (nth 2 x)) "box" (nth 2 x))
+                             (if (string= "" (nth 3 x)) "none" (nth 3 x))
+                             )) nodes "\n")
+          "\n"
+          (mapconcat
+           (lambda (x)
+             (format "%s -> %s [taillabel=\"%s\"]"
+                             (car x) (nth 1 x) (nth 2 x))) graph "\n")
+          "}\n")
+#+END_SRC
+
+#+RESULTS: daily_flow_graph
+
+
+#+BEGIN_SRC dot :file "PATH/example.png" :noweb yes
+<<daily_flow_graph()>>
+#+END_SRC
+
+#+RESULTS:
