@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: GCP_current_project
+# key: gcpcurr
+# --
+gcloud config get-value core/project

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: exportcsv
+# key: exportcsv
+# --
+
+$1.to_csv(r'$2',sep=',',index=False)

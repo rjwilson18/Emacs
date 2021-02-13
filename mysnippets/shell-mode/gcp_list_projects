@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: GCP_list_projects
+# key: gcplp
+# --
+gcloud projects list

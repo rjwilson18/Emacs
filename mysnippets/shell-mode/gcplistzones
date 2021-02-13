@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: gcplistzones
+# key: gcplistzones
+# --
+
+gcloud compute zones list --filter="name~'us-'"

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: importexcel
+# key: importexcel
+# --
+$1 = pd.read_excel (r'$2')

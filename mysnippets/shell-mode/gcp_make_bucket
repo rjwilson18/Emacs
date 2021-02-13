@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: GCP_make_bucket
+# key: gcpmb
+# --
+gsutil mb -c standard -l us-east1 gs://$1

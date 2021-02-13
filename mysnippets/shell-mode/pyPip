@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: pyPip
+# key: pyPip
+# --
+
+py -m pip install -U pyodbc $1  --user 

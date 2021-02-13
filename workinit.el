@@ -10,7 +10,7 @@
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
 
 (setq package-enable-at-startup nil)
-(package-initialize)
+;;(package-initialize)
 
 (defun ensure-package-installed (&rest packages)
   "Assure every package is installed, ask for installation if it’s not.
@@ -46,6 +46,7 @@ Return a list of installed packages or nil for every skipped package."
  'powershell
  'htmlize
  'yasnippet
+ 'org-download
  )
 
 
@@ -89,12 +90,36 @@ Return a list of installed packages or nil for every skipped package."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; set global abbrev mode and file location
 (setq-default abbrev-mode t) ;;gloablly set abbreviation mode on
-(setq abbrev-file-name "c:/users/rwilso14/OneDrive - American Family/Emacs/emacs/abbreviations") ;;store abbreviations here
+(setq abbrev-file-name "C:/Users/rwilso14/Documents/emacs/Emacs/abbreviations") ;;store abbreviations here
 
 ;;set yas directory and turn snippets on
 (yas-global-mode 1) ;;Globally turn yas mode on
-(yas-load-directory "c:/users/rwilso14/OneDrive - American Family/Emacs/emacs/mysnippets")
-(setq yas-snippet-dirs '("c:/users/rwilso14/OneDrive - American Family/Emacs/emacs/mysnippets"))
+(yas-load-directory "C:/Users/rwilso14/Documents/emacs/Emacs/mysnippets")
+(setq yas-snippet-dirs '("C:/Users/rwilso14/Documents/emacs/Emacs/mysnippets"))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                        DOT                         ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;This overwrites a function in ob-dot.el to modify the command to call dot
+;;I had to do this because I can't edit the PATH variables on my work machine.
+
+(defun org-babel-execute:dot (body params)
+  "Execute a block of Dot code with org-babel.
+This function is called by `org-babel-execute-src-block'."
+  (let* ((out-file (cdr (or (assq :file params)
+			    (error "You need to specify a :file parameter"))))
+	 (cmdline (or (cdr (assq :cmdline params))
+		      (format "-T%s" (file-name-extension out-file))))
+	 (cmd (or (cdr (assq :cmd params)) "C:/Users/rwilso14/Documents/graphviz/bin/dot.exe"))
+	 (in-file (org-babel-temp-file "dot-")))
+    (with-temp-file in-file
+      (insert (org-babel-expand-body:dot body params)))
+    (org-babel-eval
+     (concat cmd 
+	     " " (org-babel-process-file-name in-file)
+	     " " cmdline
+	     " -o " (org-babel-process-file-name out-file)) "")
+    nil)) ;; signal that output has already been written to file
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                      Org Mode                      ;;
@@ -111,11 +136,28 @@ Return a list of installed packages or nil for every skipped package."
   )
 )
 
+;; Drag-and-drop to `dired`, used for copy/pasting images/files into org
+(require 'org-download)
+(add-hook 'dired-mode-hook 'org-download-enable)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                        GnuGP                       ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(custom-set-variables
+ '(epg-gpg-home-directory "c:/Users/rwilso14/AppData/Roaming/gnupg")
+ '(epg-gpg-program "C:/Program Files (x86)/gnupg/bin/gpg.exe")
+ '(epg-gpgconf-program "c:/Program Files (x86)/gnupg/bin/gpgconf.exe")
+)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                        Misc.                       ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; alias yes/no y/n
 (defalias 'yes-or-no-p 'y-or-n-p)
-
+;; global line numbers
+(global-linum-mode t)
+;;enable normally disabled functions
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
 
