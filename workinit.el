@@ -140,6 +140,16 @@ This function is called by `org-babel-execute-src-block'."
 (require 'org-download)
 (add-hook 'dired-mode-hook 'org-download-enable)
 
+;; Add TODO keywords and Customize their appearance
+(setq org-todo-keywords
+      '((sequence "TODO" "QUESTION" "BLOCKED" "|" "DONE" "CANCELLED" "DELEGATED")))
+
+(setq org-todo-keyword-faces
+      '(("TODO" . org-warning)
+	("QUESTION" . "yellow")
+	("BLOCKED" . "red")
+        ("CANCELLED" . (:foreground "blue" :weight bold))))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                        GnuGP                       ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
