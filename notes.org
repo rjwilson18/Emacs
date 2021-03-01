@@ -67,6 +67,10 @@ Pull repo with clone command:
 git clone https://git.com/rjwilson18/REPO_NAME.git
 #+end_src
 
+** Git commands
+*** Add to Repo
+Add all files in directory: git add .
+Add subfolder: git add subfolder/*
 ** Create Repository
 #+begin_src lisp
  (magit-init)
@@ -98,6 +102,17 @@ tab to expand/collapse
 #+end_src
 
 p to push to remote
+** Misc
+*** SSH Key
+Create SSH Key:
+ssh-keygen -o -t rsa -b 2048 "<email address>"
+Do not enter a passphrase.
+
+This will create three files in C:/users/<userID>/.ssh
+
+1. id_rsa is private key
+2. id_rsa.pub is public key (add this gitlab etc.)
+3. config (go here if any of the options are wrong by default)
 * Grphviz Notes
 ** Graphviz Setup
 Download:
