@@ -47,9 +47,12 @@ Return a list of installed packages or nil for every skipped package."
  'htmlize
  'yasnippet
  'org-download
- 'ein
  )
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;               Load Common Init File                ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(load-file "C:/Users/rwilso14/Documents/emacs/Emacs/rw_common.el")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                    Submode Hooks                   ;;
