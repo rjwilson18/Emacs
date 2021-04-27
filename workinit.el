@@ -47,6 +47,7 @@ Return a list of installed packages or nil for every skipped package."
  'htmlize
  'yasnippet
  'org-download
+ 'ein
  )
 
 
