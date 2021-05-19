@@ -47,6 +47,8 @@ Return a list of installed packages or nil for every skipped package."
  'htmlize
  'yasnippet
  'org-download
+ 'ssh
+ 'pyenv-mode
  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -67,6 +69,9 @@ Return a list of installed packages or nil for every skipped package."
 
 ;;Did not need on this machine, but needed on work vdi
 ;;(setq python-shell-interpreter "Full path to python.exe")
+
+;;enable pyenv
+(pyenv-mode)
 
 ;;Restart Python function
 (defun restart-python-console ()

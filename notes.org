@@ -237,3 +237,6 @@ Make sure this block is in the .emacs
 #+END_SRC
 
 #+RESULTS:
+* Yas-Snippet
+** Choose Value
+START_OF_COMMAND ${1:$$(yas-choose-value '(option 1" "option 2" "option 3"))}
