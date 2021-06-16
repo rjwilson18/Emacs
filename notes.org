@@ -240,3 +240,68 @@ Make sure this block is in the .emacs
 * Yas-Snippet
 ** Choose Value
 START_OF_COMMAND ${1:$$(yas-choose-value '(option 1" "option 2" "option 3"))}
+* Python/Pyenv
+** Install PyEnv
+Full instructions here: https://github.com/pyenv-win/pyenv-win
+
+*** 1. Install
+If Python is already installed:
+#+begin_src bash
+pip install pyenv-win --target %USERPROFILE%\.pyenv
+#+end_src
+
+OR
+
+#+begin_src powershell
+pip install pyenv-win --target $HOME\\.pyenv
+#+end_src
+
+If Python is not installed:
+#+begin_src powershell
+git clone https://github.com/pyenv-win/pyenv-win.git "$HOME/.pyenv"
+#+end_src
+
+*** 2. Disable Execution Alias
+If running Windows 10 1905 or newer, disable the built-in Python launcher via Start > "Manage App Execution Aliases" and turning off the "App Installer" aliases for Python and Python3
+
+*** 3. Manage Environment Variables
+#+begin_src powershell
+[System.Environment]::SetEnvironmentVariable('PYENV',$env:USERPROFILE + "\.pyenv\pyenv-win\","User")
+[System.Environment]::SetEnvironmentVariable('PYENV_HOME',$env:USERPROFILE + "\.pyenv\pyenv-win\","User")
+[System.Environment]::SetEnvironmentVariable('path', $env:USERPROFILE + "\.pyenv\pyenv-win\bin;" + $env:USERPROFILE + "\.pyenv\pyenv-win\shims;" + [System.Environment]::GetEnvironmentVariable('path', "User"),"User")
+#+end_src
+
+*** 4. Test
+Restart shell/powershell
+
+#+begin_src powershell or bash
+pyenv --version
+pyenv rehash
+pyenv
+#+end_src
+** Usage
+*** See all versions
+#+begin_src powershell
+pyenv versions
+#+end_src
+
+*** Install new version of Python
+See possible list
+#+begin_src powershell
+pyenv install -l
+#+end_src
+
+Install chosen version
+#+begin_src powershell
+pyenv install 3.9.4
+#+end_src
+
+*** Switch Versions
+#+begin_src powershell
+pyenv global 3.9.4
+#+end_src
+
+See Current Version
+#+begin_src powershell
+pyenv version
+#+end_src
