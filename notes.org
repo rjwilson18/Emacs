@@ -113,6 +113,19 @@ This will create three files in C:/users/<userID>/.ssh
 1. id_rsa is private key
 2. id_rsa.pub is public key (add this gitlab etc.)
 3. config (go here if any of the options are wrong by default)
+*** Set Notepad++ for config editor.
+By default VI is the text editor for the git config file.
+Set it to notepad ++ with this command:
+#+begin_src bash
+git config --global core.editor "'C:/Program Files/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"
+#+end_src
+*** Enable tracing
+GIT_CURL_VERBOSE=1 GIT_TRACE=1 git COMMAND_HERE
+** Errors/Issue
+*** Git Push hanging.
+Encountered 7/19/21 in v2.32.0 on work MS Surface
+Solution was to rollback to v2.30.2
+
 * Grphviz Notes
 ** Graphviz Setup
 Download:
