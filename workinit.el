@@ -48,7 +48,7 @@ Return a list of installed packages or nil for every skipped package."
  'yasnippet
  'org-download
  'ssh
- 'pyenv-mode
+ 'tramp
  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -69,9 +69,6 @@ Return a list of installed packages or nil for every skipped package."
 
 ;;Did not need on this machine, but needed on work vdi
 ;;(setq python-shell-interpreter "Full path to python.exe")
-
-;;enable pyenv
-(pyenv-mode)
 
 ;;Restart Python function
 (defun restart-python-console ()
@@ -99,11 +96,11 @@ Return a list of installed packages or nil for every skipped package."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; set global abbrev mode and file location
 (setq-default abbrev-mode t) ;;gloablly set abbreviation mode on
-(setq abbrev-file-name "C:/Users/rwilso14/Documents/emacs/Emacs/abbreviations") ;;store abbreviations here
+(setq abbrev-file-name "C:/Users/rxw064/Documents/emacs/Emacs/abbreviations") ;;store abbreviations here
 
 ;;set yas directory and turn snippets on
 (yas-global-mode 1) ;;Globally turn yas mode on
-(yas-load-directory "C:/Users/rwilso14/Documents/emacs/Emacs/mysnippets")
+(yas-load-directory "C:/Users/rxw064/Documents/emacs/Emacs/mysnippets")
 (setq yas-snippet-dirs '("C:/Users/rwilso14/Documents/emacs/Emacs/mysnippets"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -163,10 +160,34 @@ This function is called by `org-babel-execute-src-block'."
 ;;                        GnuGP                       ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (custom-set-variables
- '(epg-gpg-home-directory "c:/Users/rwilso14/AppData/Roaming/gnupg")
+ '(epg-gpg-home-directory "c:/Users/rxw064/AppData/Roaming/gnupg")
  '(epg-gpg-program "C:/Program Files (x86)/gnupg/bin/gpg.exe")
  '(epg-gpgconf-program "c:/Program Files (x86)/gnupg/bin/gpgconf.exe")
-)
+ )
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                       GCP SSH                      ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; make sure you've set your default project with:
+;; gcloud config set project <project-name>
+
+(require 'tramp)
+(add-to-list 'tramp-methods
+  '("gcpssh"
+    (tramp-login-program        "gcloud compute ssh")
+    (tramp-login-args           (("%h")))
+    (tramp-async-args           (("-q")))
+    (tramp-remote-shell         "/bin/sh")
+    (tramp-remote-shell-args    ("-c"))
+    (tramp-gw-args              (("-o" "GlobalKnownHostsFile=/dev/null")
+                                 ("-o" "UserKnownHostsFile=/dev/null")
+                                 ("-o" "StrictHostKeyChecking=no")))
+    (tramp-default-port         22)))
+
+;;(setq tramp-shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"")
+;; ... after which it's as easy as:
+;;
+;; C-x C-f /gcpssh:compute-instance:/path/to/filename.clj
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                        Misc.                       ;;
