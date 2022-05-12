@@ -57,3 +57,5 @@
 (put 'upcase-region 'disabled nil)
 ;;turn off electric indent mode 
 (electric-indent-mode -1)
+;;turn on delete selection mode
+(delete-selection-mode 1)
