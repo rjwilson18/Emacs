@@ -49,47 +49,13 @@ Return a list of installed packages or nil for every skipped package."
  'org-download
  'ssh
  'tramp
+ 'humanoid-themes
  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               Load Common Init File                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (load-file "C:/Users/rxw064/Documents/emacs/Emacs/rw_common.el")
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;                    Submode Hooks                   ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;Define almost-universal rainbow delimiters
-(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'text-mode-hook 'rainbow-delimiters-mode)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;                        Python                      ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;;Did not need on this machine, but needed on work vdi
-;;(setq python-shell-interpreter "Full path to python.exe")
-
-;;Restart Python function
-(defun restart-python-console ()
-  "Restart python console before evaluate buffer or region to avoid various uncanny conflicts, like not reloding modules even when they are changed"
-  (interactive)
-  (kill-process "Python")
-  (sleep-for 0.05)
-  (kill-buffer "*Python*")
-  (run-python)
-  (switch-to-buffer "*Python*")
-  )
-;;Assign Hotkey
-(global-set-key (kbd "C-x C-p") 'restart-python-console)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;                        Magit                       ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(global-set-key (kbd "C-x g") 'magit-status)
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               Abbreviations Yas Handler            ;;
@@ -193,11 +159,7 @@ This function is called by `org-babel-execute-src-block'."
 ;;                        Misc.                       ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; alias yes/no y/n
-(defalias 'yes-or-no-p 'y-or-n-p)
-;; global line numbers
-(global-linum-mode t)
-;;enable normally disabled functions
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
+;; set theme
+(load-theme 'humanoid-light t)
+
 
