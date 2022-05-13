@@ -160,6 +160,6 @@ This function is called by `org-babel-execute-src-block'."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; set theme
-(load-theme 'humanoid-light t)
+(load-theme 'humanoid-dark t)
 
 
