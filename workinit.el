@@ -1,4 +1,3 @@
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                 Manage Packages                    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -39,8 +38,6 @@ Return a list of installed packages or nil for every skipped package."
 ;; Pacakges to ensure are installed
 (ensure-package-installed
  'rainbow-delimiters
- 'ess
- 'ess-R-data-view
  'xkcd
  'magit
  'powershell
@@ -130,30 +127,6 @@ This function is called by `org-babel-execute-src-block'."
  '(epg-gpg-program "C:/Program Files (x86)/gnupg/bin/gpg.exe")
  '(epg-gpgconf-program "c:/Program Files (x86)/gnupg/bin/gpgconf.exe")
  )
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;                       GCP SSH                      ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; make sure you've set your default project with:
-;; gcloud config set project <project-name>
-
-(require 'tramp)
-(add-to-list 'tramp-methods
-  '("gcpssh"
-    (tramp-login-program        "gcloud compute ssh")
-    (tramp-login-args           (("%h")))
-    (tramp-async-args           (("-q")))
-    (tramp-remote-shell         "/bin/sh")
-    (tramp-remote-shell-args    ("-c"))
-    (tramp-gw-args              (("-o" "GlobalKnownHostsFile=/dev/null")
-                                 ("-o" "UserKnownHostsFile=/dev/null")
-                                 ("-o" "StrictHostKeyChecking=no")))
-    (tramp-default-port         22)))
-
-;;(setq tramp-shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"")
-;; ... after which it's as easy as:
-;;
-;; C-x C-f /gcpssh:compute-instance:/path/to/filename.clj
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                        Misc.                       ;;
