@@ -51,7 +51,7 @@
 ;; alias yes/no y/n
 (defalias 'yes-or-no-p 'y-or-n-p)
 ;; global line numbers
-(global-linum-mode t)
+(display-line-numbers-mode t) 
 ;;enable normally disabled functions
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
