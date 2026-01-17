@@ -2,10 +2,14 @@
 ;;                    Submode Hooks                   ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;Define almost-universal rainbow delimiters
-(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+;;(require 'rainbow-delimiters)
+;;(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+
+(use-package rainbow-delimiters
+ :ensure t
+ :hook (prog-mode . rainbow-delimiters-mode)
+)
 (add-hook 'text-mode-hook 'rainbow-delimiters-mode)
-
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                 Custom Functions                   ;;
@@ -51,7 +55,7 @@
 ;; alias yes/no y/n
 (defalias 'yes-or-no-p 'y-or-n-p)
 ;; global line numbers
-(display-line-numbers-mode t) 
+(global-display-line-numbers-mode) 
 ;;enable normally disabled functions
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
