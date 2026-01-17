@@ -54,7 +54,7 @@ Return a list of installed packages or nil for every skipped package."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;               Abbreviations Yas Handler            ;;
+;;             Abbreviations & Yas Handler            ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; set global abbrev mode and file location
 (setq-default abbrev-mode t) ;;gloablly set abbreviation mode on
@@ -62,7 +62,7 @@ Return a list of installed packages or nil for every skipped package."
 
 ;;set yas directory and turn snippets on
 (yas-global-mode 1) ;;Globally turn yas mode on
-(setq yas-snippet-dirs (concat emacs-repo-dir "mysnippets"))
+(setq yas-snippets-dir (concat emacs-repo-dir "mysnippets"))
 (yas-load-directory yas-snippets-dir)
 
 
@@ -79,16 +79,3 @@ Return a list of installed packages or nil for every skipped package."
     )
   )
    )
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;                        Python                      ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(setq python-shell-interpreter "/opt/homebrew/bin/python3.9")
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;                        Fish                        ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq explicit-shell-file-name "/opt/homebrew/bin/fish")
-(defun my-init-shell-mode () (setq comint-process-echoes t))
-(with-eval-after-load 'shell (add-hook 'shell-mode-hook #'my-init-shell-mode))
